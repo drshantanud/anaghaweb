@@ -132,8 +132,10 @@
         })
         .catch(function () { status.textContent = ''; });
     };
-    dateEl.addEventListener('change', load);
-    if (dateEl.value) load();
+    if (!form.hasAttribute('data-static')) {
+      dateEl.addEventListener('change', load);
+      if (dateEl.value) load();
+    }
 
     form.addEventListener('submit', function () {
       var btn = form.querySelector('button[type=submit]');
@@ -145,4 +147,86 @@
 
   var summary = document.getElementById('error-summary');
   if (summary) { summary.scrollIntoView({ block: 'start' }); summary.focus({ preventScroll: true }); }
+})();
+
+// Static hosting (Netlify): no server, so check clinic rules in the browser
+// and let Netlify Forms receive the request.
+(function () {
+  'use strict';
+  var lang = document.documentElement.lang === 'mr' ? 'mr' : 'en';
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var todayIST = function () { var d = new Date(Date.now() + 330 * 60000); return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate()); };
+  var setErr = function (form, id, msg) {
+    var el = form.querySelector('#' + id), p = form.querySelector('#' + id + '-err');
+    if (el) el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    if (p) { p.hidden = !msg; p.textContent = msg || ''; }
+    return !msg;
+  };
+  var mobileOk = function (v) { v = v.replace(/[\s\-().]/g, '').replace(/^\+?91(?=\d{10}$)/, '').replace(/^0(?=\d{10}$)/, ''); return /^[6-9]\d{9}$/.test(v); };
+  var nameOk = function (v) { return v.replace(/[^\p{L}]/gu, '').length >= 2; };
+
+  var form = document.querySelector('form[data-static]');
+  if (form) {
+    var E = JSON.parse(form.getAttribute('data-errors'));
+    var days = form.getAttribute('data-days').split(',').map(Number);
+    var closures = JSON.parse(form.getAttribute('data-closures') || '[]');
+    var max = form.getAttribute('data-max');
+    var checkDate = function (v) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return E.date;
+      if (v < todayIST()) return E.date_past;
+      if (v > max) return E.date_far.replace('{days}', '');
+      var dow = new Date(v + 'T00:00:00Z').getUTCDay();
+      if (dow === 0 || days.indexOf(dow) === -1) return E.date_closed;
+      for (var i = 0; i < closures.length; i++) if (v >= closures[i].from && v <= (closures[i].to || closures[i].from)) return E.date_holiday.replace('{note}', closures[i].note || '');
+      return '';
+    };
+    var dateEl = form.querySelector('#f-date');
+    dateEl.addEventListener('change', function () { setErr(form, 'f-date', checkDate(dateEl.value)); });
+    form.addEventListener('submit', function (e) {
+      var ok = true, first = null;
+      var mark = function (id, msg) { if (!setErr(form, id, msg)) { ok = false; first = first || id; } };
+      mark('f-name', nameOk(form.elements['name'].value) ? '' : E.name);
+      mark('f-mobile', mobileOk(form.elements['mobile'].value) ? '' : E.mobile);
+      mark('f-date', checkDate(dateEl.value));
+      mark('f-time', form.elements['time'].value ? '' : E.time);
+      mark('f-reason', form.elements['reason'].value ? '' : E.reason);
+      mark('f-message', form.elements['message'].value.length > 500 ? E.message : '');
+      mark('f-consent', form.elements['consent'].checked ? '' : E.consent);
+      if (!ok) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        var btn = form.querySelector('button[type=submit]'); btn.disabled = false;
+        form.querySelector('#' + first).focus();
+        return;
+      }
+      try {
+        var opt = form.elements['time'].selectedOptions[0];
+        sessionStorage.setItem('ad-request', JSON.stringify({ clinic: form.getAttribute('data-clinic-name'), date: dateEl.value, time: opt ? opt.textContent : '' }));
+      } catch (err) {}
+    }, true);
+  }
+
+  var contact = document.querySelector('form[data-static-contact]');
+  if (contact) {
+    var CE = JSON.parse(contact.getAttribute('data-errors'));
+    contact.addEventListener('submit', function (e) {
+      var ok = setErr(contact, 'c-name', nameOk(contact.elements['name'].value) ? '' : CE.name);
+      ok = setErr(contact, 'c-mobile', mobileOk(contact.elements['mobile'].value) ? '' : CE.mobile) && ok;
+      ok = setErr(contact, 'c-message', contact.elements['message'].value.trim() ? '' : CE.message) && ok;
+      if (!contact.elements['consent'].checked) { ok = false; alert(CE.consent); }
+      if (!ok) e.preventDefault();
+    });
+  }
+
+  var rec = document.querySelector('[data-received]');
+  if (rec) {
+    try {
+      var d = JSON.parse(sessionStorage.getItem('ad-request') || 'null');
+      if (d) {
+        var dt = new Date(d.date + 'T00:00:00Z');
+        rec.querySelector('[data-k=clinic]').textContent = d.clinic;
+        rec.querySelector('[data-k=when]').textContent = dt.toLocaleDateString(lang === 'mr' ? 'mr-IN' : 'en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }) + ', ' + d.time;
+        rec.hidden = false;
+      }
+    } catch (err) {}
+  }
 })();

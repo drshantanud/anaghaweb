@@ -69,6 +69,18 @@ Create users with `npm run create-admin` or in **Admin → Users**. Passwords ar
 
 ## Deploy
 
+### Netlify (static version)
+
+Netlify cannot run the Node server, so `netlify.toml` builds a static copy instead (`node scripts/build-static.js` → `dist/`). Connect the repo in Netlify; no settings are needed. In the static version:
+
+- All pages, both languages, call and WhatsApp buttons work as normal.
+- Online appointment requests and contact messages go to **Netlify → Forms** (`appointment-request`, `enquiry`). Turn on email notifications there (Forms → Form notifications). Staff confirm by phone or WhatsApp.
+- Clinic days, Sundays, past dates and holidays are checked in the browser. There is no admin dashboard, slot limit, duplicate check or status lookup; those need the full server below.
+- Content is edited in `content/*.js` and redeployed. Set `SITE_LIVE=1` in Netlify → Site configuration → Environment variables to leave preview mode.
+- Netlify Forms stores submissions on Netlify's servers; mention this in the privacy policy before launch.
+
+### Full version (Node server)
+
 Required environment variables in production (see `.env.example`): `NODE_ENV=production`, `SITE_URL`, `SESSION_SECRET`, `DATA_ENCRYPTION_KEY`, and `DATA_DIR` on a **persistent disk**. The server refuses to start in production without them. Keep `DATA_ENCRYPTION_KEY` safe: without it the appointment records cannot be read.
 
 ### Option A: Docker on any VPS (recommended)
