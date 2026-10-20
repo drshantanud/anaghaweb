@@ -6,6 +6,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  SITE_URL = "https://www.dranaghadeshpande.com"
 
 # Old server-style links keep working
 [[redirects]]
@@ -47,3 +48,10 @@
   for = "/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Send netlify.app and the bare domain to the main address
+[[redirects]]
+  from = "https://dranaghadeshpande.com/*"
+  to = "https://www.dranaghadeshpande.com/:splat"
+  status = 301
+  force = true
