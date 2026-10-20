@@ -1,0 +1,7 @@
+# Caddy obtains and renews HTTPS certificates automatically.
+www.example.com {
+	reverse_proxy 127.0.0.1:3000
+}
+example.com {
+	redir https://www.example.com{uri} permanent
+}

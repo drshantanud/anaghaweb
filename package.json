@@ -1,0 +1,23 @@
+{
+  "name": "dr-anagha-deshpande-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website and appointment-request system for Dr. Anagha Deshpande, Consultant Ophthalmologist, Chembur, Mumbai",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js",
+    "create-admin": "node scripts/create-user.js",
+    "backup": "node scripts/backup.js",
+    "test": "node --test test/unit.test.js test/http.test.js",
+    "test:e2e": "node test/e2e.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "playwright-core": "^1.48.0",
+    "axe-core": "^4.10.0"
+  }
+}

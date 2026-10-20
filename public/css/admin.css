@@ -1,0 +1,54 @@
+/* Admin dashboard */
+body.admin { background: #f4f7f7; font-size: 1rem; }
+.admin-header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; background: var(--teal); color: #fff; padding: 10px 20px; }
+.admin-header .btn--ghost { color: #fff; border-color: rgba(255,255,255,.4); }
+.admin-brand { color: #fff; font-weight: 700; text-decoration: none; margin-right: auto; }
+.admin-user { font-size: .95rem; opacity: .9; }
+.inline { display: inline; }
+.admin-wrap { display: grid; gap: 0; }
+@media (min-width: 900px) { .admin-wrap { grid-template-columns: 220px 1fr; } }
+.admin-nav { background: #fff; border-right: 1px solid var(--line); padding: 12px; display: flex; flex-wrap: wrap; gap: 4px; align-content: start; }
+@media (min-width: 900px) { .admin-nav { flex-direction: column; min-height: calc(100vh - 56px); } }
+.admin-nav a { padding: 10px 12px; border-radius: 10px; text-decoration: none; color: var(--ink); font-weight: 600; }
+.admin-nav a[aria-current="page"], .admin-nav a:hover { background: var(--aqua); color: var(--teal-dark); }
+.admin-main { padding: 24px; min-width: 0; }
+.admin-main h1 { font-size: 1.8rem; }
+.admin-main h2 { font-size: 1.3rem; margin-top: 1.4em; }
+.acard { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+.narrow-form { max-width: 420px; }
+.afield { display: block; margin-bottom: 14px; }
+.afield > span { display: block; font-weight: 600; margin-bottom: 4px; }
+.afield small { display: block; color: var(--muted); margin-bottom: 4px; }
+.afield input, .afield select, .afield textarea { font-size: 1rem; min-height: 44px; }
+.acheck { display: inline-flex; gap: 8px; align-items: center; margin: 4px 16px 12px 0; }
+.bi { display: grid; gap: 0 16px; }
+@media (min-width: 900px) { .bi, .grid2 { grid-template-columns: 1fr 1fr; display: grid; gap: 0 16px; } }
+fieldset { border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; margin: 0 0 16px; }
+legend { font-weight: 700; padding: 0 6px; }
+.days { display: flex; flex-wrap: wrap; }
+.kpis { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px; }
+.kpi { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; text-decoration: none; color: var(--ink); display: flex; flex-direction: column; }
+.kpi strong { font-size: 2rem; color: var(--teal); }
+.atable { font-size: .95rem; }
+.atable td.actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; min-width: 220px; }
+.atable td.actions form { margin: 0; }
+.resched form { display: grid; gap: 6px; margin-top: 8px; padding: 10px; background: var(--cream); border-radius: 10px; }
+.resched summary { list-style: none; }
+.pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .85rem; font-weight: 600; white-space: nowrap; }
+.pill--requested { background: #fff1c2; color: #6b4e00; }
+.pill--confirmed, .pill--rescheduled { background: var(--sage-light); color: #24573f; }
+.pill--cancelled { background: #fdecea; color: var(--danger); }
+.pill--completed { background: #e8eef0; color: var(--ink-2); }
+tr.st-cancelled td { opacity: .65; }
+.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-bottom: 14px; }
+.filters label { display: flex; flex-direction: column; font-weight: 600; font-size: .9rem; }
+.filters input, .filters select { min-height: 42px; font-size: .95rem; width: auto; }
+.flash { background: var(--sage-light); border-left: 4px solid var(--sage); padding: 10px 14px; border-radius: 8px; }
+.checklist li { margin-bottom: 6px; }
+.alist { padding-left: 1.2em; }
+.alist li { margin-bottom: 6px; }
+.photo-row { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.photo-row img { border-radius: 12px; }
+.photo-form { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+.photo-form input[type=file] { min-height: 0; border: 0; padding: 0; width: auto; }
+.admin-wrap--solo { grid-template-columns: 1fr !important; }
