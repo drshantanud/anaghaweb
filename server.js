@@ -104,6 +104,9 @@ async function handle(req, res) {
   if (p === '/healthz') return H.json(res, 200, { ok: true });
   if (PROD && TRUST_PROXY && !https && process.env.FORCE_HTTPS !== '0') return H.redirect(res, SITE_URL + req.url, 301);
 
+  // Search engine site-verification files at the root (e.g. Google Search Console)
+  if (/^\/google[0-9a-f]+\.html$/.test(p) && H.serveStatic(req, res, PUBLIC, p.slice(1), { maxAge: 3600 })) return;
+
   // Static assets
   for (const prefix of ['/css/', '/js/', '/img/', '/fonts/', '/video/']) {
     if (p.startsWith(prefix) && (req.method === 'GET' || req.method === 'HEAD')) {
