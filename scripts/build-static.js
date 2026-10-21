@@ -5,7 +5,7 @@
 // dashboard, slot limits and status lookup need the Node server (npm start).
 //
 // Usage: node scripts/build-static.js
-// Env:   SITE_URL (defaults to Netlify's URL), SITE_LIVE=1 to leave preview mode
+// Env:   SITE_URL (defaults to Netlify's URL), SITE_LIVE=0 to build in preview mode
 
 const fs = require('fs');
 const path = require('path');
@@ -17,7 +17,7 @@ const faqData = JSON.parse(JSON.stringify(require('../content/faqs')));
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(ROOT, 'dist');
 const SITE_URL = (process.env.SITE_URL || process.env.URL || 'http://localhost:8888').replace(/\/$/, '');
-content.settings.siteLive = process.env.SITE_LIVE === '1';
+if (process.env.SITE_LIVE) content.settings.siteLive = process.env.SITE_LIVE === '1';
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(path.join(ROOT, 'public'), OUT, { recursive: true });

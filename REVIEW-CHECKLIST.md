@@ -1,5 +1,7 @@
 # Before launch: items for Dr. Deshpande to confirm
 
+**Status (21 October 2026): checked and confirmed; the site is live.** Kept for reference when content changes.
+
 The site stays in preview mode (not indexed, review banner shown) until these are done and **Website is LIVE** is ticked in Admin → Settings. The admin dashboard shows the same list.
 
 ## Details that need confirming

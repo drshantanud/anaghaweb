@@ -1,7 +1,7 @@
 'use strict';
 // Default FAQ library (English + Marathi). Copied into the data store on first
 // start; edited and approved in the admin dashboard after that.
-// reviewed: false until Dr. Deshpande approves the wording.
+// reviewed: approved by Dr. Deshpande (October 2026).
 
 const categories = [
   { id: 'cataract', en: 'Cataract and cataract surgery', mr: 'मोतीबिंदू व मोतीबिंदू शस्त्रक्रिया' },
@@ -19,7 +19,7 @@ const categories = [
 const f = (id, category, q, short, detail, opts = {}) => ({
   id, category, q, short, detail,
   emergency: !!opts.emergency, related: opts.related || [], popular: !!opts.popular,
-  published: true, reviewed: false
+  published: true, reviewed: true
 });
 
 const faqs = [

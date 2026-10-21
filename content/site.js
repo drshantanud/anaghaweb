@@ -8,7 +8,7 @@ const mapsSearch = q => 'https://www.google.com/maps/search/?api=1&query=' + enc
 
 module.exports = {
   settings: {
-    siteLive: false,            // false = preview mode: noindex + review banner
+    siteLive: true,             // false = preview mode: noindex + review banner
     email: '',                  // placeholder until supplied
     bookingWindowDays: 30,
     minNoticeMinutes: 60,
@@ -53,7 +53,7 @@ module.exports = {
       { en: 'Intraocular lens selection and counselling', mr: 'कृत्रिम भिंग (इंट्राऑक्युलर लेन्स) निवड व समुपदेशन' },
       { en: 'Comprehensive eye examination', mr: 'डोळ्यांची सर्वांगीण तपासणी' }
     ],
-    languagesSpoken: { en: 'English and Marathi', mr: 'इंग्रजी आणि मराठी', confirm: true },
+    languagesSpoken: { en: 'English and Marathi', mr: 'इंग्रजी आणि मराठी' },
     education: [
       { degree: { en: 'MS (Ophthalmology)', mr: 'एमएस (नेत्ररोगशास्त्र)' }, place: { en: 'T.N. Medical College, Mumbai University', mr: 'टी. एन. मेडिकल कॉलेज, मुंबई विद्यापीठ' }, years: '2003–2006' },
       { degree: { en: 'FCPS (Ophthalmology)', mr: 'एफसीपीएस (नेत्ररोगशास्त्र)' }, place: { en: 'College of Physicians and Surgeons, Mumbai', mr: 'कॉलेज ऑफ फिजिशियन्स अँड सर्जन्स, मुंबई' }, years: '2003–2006' },
@@ -61,7 +61,7 @@ module.exports = {
       { degree: { en: 'MBBS', mr: 'एमबीबीएस' }, place: { en: 'Government Medical College, Nanded', mr: 'शासकीय वैद्यकीय महाविद्यालय, नांदेड' }, years: '1995–2001' }
     ],
     career: [
-      { role: { en: 'Consultant Ophthalmologist', mr: 'कन्सल्टंट नेत्ररोगतज्ज्ञ' }, place: { en: 'Lions Charitable Medical Centre, Apollo Clinic, Chembur', mr: 'लायन्स चॅरिटेबल मेडिकल सेंटर, अपोलो क्लिनिक, चेंबूर' }, period: { en: 'From March 2009 (as recorded in CV)', mr: 'मार्च २००९ पासून (सीव्हीनुसार)' }, confirm: true },
+      { role: { en: 'Consultant Ophthalmologist', mr: 'कन्सल्टंट नेत्ररोगतज्ज्ञ' }, place: { en: 'Lions Charitable Medical Centre, Apollo Clinic, Chembur', mr: 'लायन्स चॅरिटेबल मेडिकल सेंटर, अपोलो क्लिनिक, चेंबूर' }, period: { en: 'From March 2009', mr: 'मार्च २००९ पासून' } },
       { role: { en: 'Junior Ophthalmic Surgeon', mr: 'कनिष्ठ नेत्रशल्यचिकित्सक' }, place: { en: 'Pramukhswami Eye Hospital, Chunabhatti', mr: 'प्रमुखस्वामी नेत्र रुग्णालय, चुनाभट्टी' }, period: { en: 'June 2007 – March 2009', mr: 'जून २००७ – मार्च २००९' } },
       { role: { en: 'Lecturer, Ophthalmology', mr: 'व्याख्याता, नेत्ररोगशास्त्र' }, place: { en: 'KEM Hospital, Parel', mr: 'केईएम रुग्णालय, परळ' }, period: { en: 'December 2006 – May 2007', mr: 'डिसेंबर २००६ – मे २००७' } },
       { role: { en: 'Senior Resident, Ophthalmology', mr: 'वरिष्ठ निवासी डॉक्टर, नेत्ररोगशास्त्र' }, place: { en: 'T.N.M.C. and Nair Hospital', mr: 'टी.एन.एम.सी. व नायर रुग्णालय' }, period: { en: 'September – December 2006', mr: 'सप्टेंबर – डिसेंबर २००६' } },
@@ -126,7 +126,7 @@ module.exports = {
     { id: 'phaco-surgery', icon: 'phaco', published: true,
       title: { en: 'Phacoemulsification cataract surgery', mr: 'फॅकोइमल्सिफिकेशन मोतीबिंदू शस्त्रक्रिया' },
       text: { en: 'Modern small-incision cataract surgery in which the cloudy lens is removed and replaced with an artificial intraocular lens, when examination shows it is appropriate.', mr: 'तपासणीनंतर योग्य असल्यास केली जाणारी आधुनिक लहान छेदाची शस्त्रक्रिया, ज्यात धूसर झालेले भिंग काढून त्याजागी कृत्रिम भिंग बसवले जाते.' },
-      where: { en: 'The place of surgery is discussed at your consultation', mr: 'शस्त्रक्रियेचे ठिकाण तपासणीच्या वेळी सांगितले जाते' }, confirm: true },
+      where: { en: 'The place of surgery is discussed at your consultation', mr: 'शस्त्रक्रियेचे ठिकाण तपासणीच्या वेळी सांगितले जाते' } },
     { id: 'eye-examination', icon: 'eye', published: true,
       title: { en: 'Comprehensive eye examinations', mr: 'डोळ्यांची सर्वांगीण तपासणी' },
       text: { en: 'Vision testing, slit-lamp examination of the front of the eye and, when needed, examination of the retina and eye pressure.', mr: 'दृष्टी तपासणी, स्लिट-लॅम्पद्वारे डोळ्याच्या पुढील भागाची तपासणी आणि गरजेनुसार पडदा (रेटिना) व डोळ्यांच्या दाबाची तपासणी.' },

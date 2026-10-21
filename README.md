@@ -76,7 +76,7 @@ Netlify cannot run the Node server, so `netlify.toml` builds a static copy inste
 - All pages, both languages, call and WhatsApp buttons work as normal.
 - Online appointment requests and contact messages go to **Netlify → Forms** (`appointment-request`, `enquiry`). Turn on email notifications there (Forms → Form notifications). Staff confirm by phone or WhatsApp.
 - Clinic days, Sundays, past dates and holidays are checked in the browser. There is no admin dashboard, slot limit, duplicate check or status lookup; those need the full server below.
-- Content is edited in `content/*.js` and redeployed. Set `SITE_LIVE=1` in Netlify → Site configuration → Environment variables to leave preview mode.
+- Content is edited in `content/*.js` and redeployed. The site is live by default. Set `SITE_LIVE=0` in Netlify → Site configuration → Environment variables to go back to preview mode.
 - Netlify Forms stores submissions on Netlify's servers; mention this in the privacy policy before launch.
 
 ### Full version (Node server)

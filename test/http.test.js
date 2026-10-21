@@ -94,7 +94,7 @@ test('SEO: titles, descriptions, canonical, hreflang, structured data, sitemap, 
   }
   const sm = await (await get('/sitemap.xml')).text();
   assert.ok(sm.includes('<loc>https://example.test/mr/cataract-surgery</loc>'));
-  assert.match(await (await get('/robots.txt')).text(), /Disallow: \//, 'preview mode blocks indexing');
+  assert.match(await (await get('/robots.txt')).text(), /Allow: \/\n[\s\S]*Sitemap:/, 'live site allows indexing');
 });
 
 test('security headers are set', async () => {
